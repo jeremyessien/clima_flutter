@@ -74,8 +74,8 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
-                      Navigator.push(
+                    onPressed: () async {
+                     var userInput = await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
@@ -83,6 +83,10 @@ class _LocationScreenState extends State<LocationScreen> {
                           },
                         ),
                       );
+                     if (userInput != null ){
+                       var weatherData = await weather.getCityWeatherDetails(userInput);
+                       updateUI(weatherData);
+                     }
                     },
                     child: Icon(
                       Icons.location_city,
